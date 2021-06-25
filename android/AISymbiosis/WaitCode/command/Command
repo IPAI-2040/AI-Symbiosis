@@ -1,0 +1,8 @@
+intent:String,slots:Bundle -> Runnable
+
+打开APP
+
+本地数据来源，界面和Activity，扫描，DiviceDetector（参考linux内核，一切即设备）
+//Domain
+Domain进入和退出（严格绑定ViewState）（被动式的退出？Device来负责传递信号）
+多加一层
