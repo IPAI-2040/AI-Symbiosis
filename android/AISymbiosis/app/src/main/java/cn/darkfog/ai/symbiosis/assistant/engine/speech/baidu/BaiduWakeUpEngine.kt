@@ -14,25 +14,19 @@ import com.baidu.speech.EventManagerFactory
 import com.baidu.speech.asr.SpeechConstant
 import io.reactivex.Completable
 import io.reactivex.Maybe
-import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
+import io.reactivex.SingleEmitter
 import org.json.JSONObject
-import java.lang.Exception
 import java.util.*
 
 object BaiduWakeUpEngine:WakeUp {
 
-    val wp =EventManagerFactory.create(AppContextLinker.context,"wp")
-    val status = SpeechState.NOT_INTI
-
+    private val wp =EventManagerFactory.create(AppContextLinker.context,"wp")
 
     override fun init(extra: Bundle?): Completable {
         return Completable.create{
             wp.registerListener(Listener)
-
         }
-        val listener:IWakeupListener = RecogWakeupListener()
-        TODO("Not yet implemented")
     }
 
     override fun start(extra: Bundle?): Maybe<SpeechEvent> {
@@ -45,14 +39,18 @@ object BaiduWakeUpEngine:WakeUp {
     }
 
     override fun stop(): Completable {
-        wp.send(SpeechConstant.WAKEUP_STOP, null, null, 0, 0)
+        return Completable.create{
+            wp.send(SpeechConstant.WAKEUP_STOP, null, null, 0, 0)
+        }
     }
 
     override fun release(): Completable {
-        TODO("Not yet implemented")
+        return Completable.create{
+            wp.send(SpeechConstant.WAKEUP_STOP, null, null, 0, 0)
+        }
     }
 
-    object Listener : EventListener {
+    private object Listener : EventListener {
         private const val CALLBACK_EVENT_WAKEUP_STARTED = "wp.enter"
         private const val CALLBACK_EVENT_WAKEUP_READY = "wp.ready"
         private const val CALLBACK_EVENT_WAKEUP_STOPPED = "wp.exit"
@@ -62,14 +60,15 @@ object BaiduWakeUpEngine:WakeUp {
         private const val CALLBACK_EVENT_WAKEUP_SUCCESS = "wp.data"
         private const val CALLBACK_EVENT_WAKEUP_AUDIO = "wp.audio"
 
-        private lateinit var emitter:ObservableEmitter<SpeechEvent>
+        private lateinit var emitter:SingleEmitter<SpeechEvent>
 
-        fun setListener(observableEmitter:ObservableEmitter<SpeechEvent>) {
-            emitter = observableEmitter
+        fun setListener(singleEmitter: SingleEmitter<SpeechEvent>) {
+            emitter = singleEmitter
         }
 
         override fun onEvent(name: String?, params: String?, data: ByteArray?, offset: Int, length: Int) {
             if (!this::emitter.isInitialized) return
+            if (emitter.isDisposed) return
             when(name){
                 CALLBACK_EVENT_WAKEUP_SUCCESS -> {
                     val result = WakeUpResult.parseJson(name, params)
@@ -77,21 +76,20 @@ object BaiduWakeUpEngine:WakeUp {
                     if (result.hasError()) { // error不为0依旧有可能是异常情况
                         emitter.onError(Exception("wake up errorCode:$errorCode"))
                     } else {
-                        val word = result.word
-                        emitter.onNext(SpeechEvent(SpeechEventType.ASR_WUW,))
-                        listener.onSuccess(word, result)
-
+                        emitter.onSuccess(SpeechEvent(SpeechEventType.ASR_WUW, result.word))
+                    }
                 }
-                CALLBACK_EVENT_WAKEUP_ERROR -> {}
+                CALLBACK_EVENT_WAKEUP_ERROR -> {
+                    val result = WakeUpResult.parseJson(name, params)
+                    val errorCode = result.errorCode
+                    if (result.hasError()) {
+                        emitter.onError(Exception("wake up errorCode:$errorCode"))
+                    }
+                }
                 CALLBACK_EVENT_WAKEUP_STOPPED -> {}
                 CALLBACK_EVENT_WAKEUP_AUDIO -> {}
 
             }
-            if(CALLBACK_EVENT_WAKEUP_SUCCESS == name){
-
-
-            }        }
-
-
+        }
     }
 }
