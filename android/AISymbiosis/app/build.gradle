@@ -99,4 +99,5 @@ dependencies {
     api 'androidx.recyclerview:recyclerview:1.1.0'
 
     implementation project(':baidu:core')
+    implementation 'org.jeasy:easy-rules-core:4.1.0'
 }

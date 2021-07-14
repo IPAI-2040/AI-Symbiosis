@@ -1,0 +1,16 @@
+{
+  "name": "template",
+  "version": "0.0.1",
+  "response": [
+    {
+      "language":"zh-cn",
+      "display":"模版显示",
+      "tts":"模版TTS"
+    },
+    {
+      "language":"ae-en",
+      "display":"this is template display",
+      "tts":"template tts"
+    }
+  ]
+}

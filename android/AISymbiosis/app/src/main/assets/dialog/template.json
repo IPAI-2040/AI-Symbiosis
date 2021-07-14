@@ -1,0 +1,36 @@
+{
+  "name": "template",
+  "version": "0.0.1",
+  "description": "A template task",
+  "engine": "TCP",
+  "breakable": true,
+  "parameters": [
+    {
+      "name": "template",
+      "type": "template_type",
+      "required": "%intent% == 'PlayControl_Pause'",
+      "skip": "true",
+      "parameters": [
+        "nlu_data"
+      ],
+      "resolver": "resolverCommandPause",
+      "need_confirm": false,
+      "dialog-act": {
+        "inform_success": "success response",
+        "inform_failure": "failure_response",
+        "inform_choose": "choose_response",
+        "inform_confirm": "confirm_response"
+      }
+    }
+  ],
+  "action_end": {
+    "type": "template",
+    "implicit_confirm": "false",
+    "dialog-act": {
+      "inform_success": "success response",
+      "inform_failure": "failure_response",
+      "inform_choose": "choose_response",
+      "inform_confirm": "confirm_response"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "triggers": [
+    {
+      "task": "template",
+      "domain": "template",
+      "path": "path",
+      "loadWhenInit":false
+      "intents": [
+        "Template_Nothing"
+      ]
+    }
+  ]
+}
