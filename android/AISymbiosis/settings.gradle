@@ -3,3 +3,4 @@ include ':app'
 
 include ':baidu:app'
 include ':baidu:core',':baidu:uiasr',':baidu:uidialog'
+include ':context'

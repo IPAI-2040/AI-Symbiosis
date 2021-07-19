@@ -1,6 +1,6 @@
 package cn.darkfog.ai.symbiosis.assistant.engine.dialog.engine.bean
 
-enum class ParameterStatus {
+enum class FrameStatus {
         Missed,
         Resolved,
         WaitSelect,

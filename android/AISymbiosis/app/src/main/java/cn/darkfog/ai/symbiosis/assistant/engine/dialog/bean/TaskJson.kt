@@ -9,7 +9,7 @@ data class TaskJson(
     val description: String,
     val engine: String,
     val name: String,
-    val parameters: List<Parameter>,
+    val parameters: List<Frame>,
     val version: String
 )
 
@@ -20,7 +20,7 @@ data class ActionEnd(
     val type: String
 )
 
-data class Parameter(
+data class Frame(
     @SerializedName("dialog-act")
     val dialogAct: DialogAct,
     val name: String,
