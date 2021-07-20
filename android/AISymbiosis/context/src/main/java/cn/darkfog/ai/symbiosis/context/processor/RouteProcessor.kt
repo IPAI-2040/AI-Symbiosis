@@ -55,7 +55,7 @@ class RouteProcessor:AbstractProcessor(){
             if (!domainMap.containsKey(domainName)){
                 throw Exception("Not exist Name: $domain")
             }
-
+            domainMap[domainName]!!.add(action)
         }
 
 
