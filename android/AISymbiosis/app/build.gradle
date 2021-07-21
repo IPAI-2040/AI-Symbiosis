@@ -96,8 +96,12 @@ dependencies {
 
     api 'androidx.constraintlayout:constraintlayout:2.0.4'
 
-    api 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.2.1'
 
     implementation project(':baidu:core')
     implementation 'org.jeasy:easy-rules-core:4.1.0'
+
+    implementation project(':context')
+    kapt project(':context')
+    annotationProcessor project(':context')
 }
