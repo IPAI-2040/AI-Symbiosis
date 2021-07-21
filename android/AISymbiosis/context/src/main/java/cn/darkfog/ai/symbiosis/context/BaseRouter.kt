@@ -4,7 +4,7 @@ import com.google.gson.JsonObject
 
 typealias RequestDataFunc = (Map<String,String>,Map<String,MutableList<JsonObject>>) -> MutableList<JsonObject>
 
-class BaseRouter {
+open class BaseRouter {
     private val routerMap:MutableMap<String,RequestDataFunc>  = mutableMapOf()
 
     fun addRequestDataFunc(action:String,func:RequestDataFunc){

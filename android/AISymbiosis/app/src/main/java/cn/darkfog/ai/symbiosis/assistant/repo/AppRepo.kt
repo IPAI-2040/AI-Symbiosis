@@ -8,7 +8,7 @@ import com.google.gson.JsonObject
 object AppRepo {
 
     @Action("getAllApps")
-    fun getAllApps():MutableList<JsonObject>{
+    fun getAllApps(frames:Map<String,String>,data:Map<String,MutableList<JsonObject>>):MutableList<JsonObject>{
         return mutableListOf()
     }
 

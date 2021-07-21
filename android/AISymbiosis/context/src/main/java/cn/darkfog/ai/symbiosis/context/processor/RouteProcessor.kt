@@ -4,8 +4,10 @@ import cn.darkfog.ai.symbiosis.context.BaseRouter
 import cn.darkfog.ai.symbiosis.context.annotation.Action
 import cn.darkfog.ai.symbiosis.context.annotation.Domain
 import com.google.auto.service.AutoService
-import com.squareup.kotlinpoet.*
-import java.lang.Exception
+import com.squareup.kotlinpoet.CodeBlock
+import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.TypeSpec
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
@@ -42,7 +44,6 @@ class RouteProcessor:AbstractProcessor(){
                          roundEnvironment: RoundEnvironment): Boolean {
         val domainElements = roundEnvironment.getElementsAnnotatedWith(Domain::class.java)
         val actionElements = roundEnvironment.getElementsAnnotatedWith(Action::class.java)
-        println("domainElements.size ${domainElements.size}")
 
         val domainMap = hashMapOf<String,MutableList<Element>>()
         val domainClzMap = hashMapOf<String,String>()
@@ -64,22 +65,20 @@ class RouteProcessor:AbstractProcessor(){
             domainMap[domainName]!!.add(action)
         }
 
-        messager.printMessage(Diagnostic.Kind.WARNING,domainMap.toString())
         //create File
         val pkgName = "cn.darkfog.ai.symbiosis.util"
         val clzName = "AndroidActionRouter"
 
         //create init block
-        val initBlock = FunSpec.constructorBuilder()
+        val initBlock = CodeBlock.builder()
         for((domainName,elements) in domainMap){
             elements.forEach { element ->
-                initBlock.addCode("addRequestDataFunc($domainName:${element.simpleName},${domainClzMap[domainName]}::${element.simpleName})\r\n")
+                initBlock.addStatement("addRequestDataFunc(\"$domainName:${element.simpleName}\",%L::%L)\r\n","${domainClzMap[domainName]}","${element.simpleName}")
             }
         }
-
         FileSpec.builder(pkgName,clzName)
-            .addType(TypeSpec.objectBuilder(clzName).superclass(BaseRouter::class.java)
-                .primaryConstructor(initBlock.build())
+            .addType(TypeSpec.objectBuilder(clzName).superclass(BaseRouter::class)
+                .addInitializerBlock(initBlock.build())
                 .build())
             .build()
             .writeTo(filer)
