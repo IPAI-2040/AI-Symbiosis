@@ -19,7 +19,7 @@ enum class RequestCode{
 }
 
 data class ExecuteResult(
-    val code:ExecuteCode =ExecuteCode.NotFound,
+    val code:ExecuteCode = ExecuteCode.NotFound,
     val data:MutableList<JsonObject> = mutableListOf()
 )
 
