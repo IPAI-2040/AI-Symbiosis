@@ -1,0 +1,16 @@
+{
+  "name": "inform_success",
+  "version": "0.0.1",
+  "response": [
+    {
+      "language":"zh-cn",
+      "display":"成功",
+      "tts":"成功"
+    },
+    {
+      "language":"ae-en",
+      "display":"success",
+      "tts":"success"
+    }
+  ]
+}

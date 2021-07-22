@@ -1,0 +1,16 @@
+{
+  "name": "inform_failure",
+  "version": "0.0.1",
+  "response": [
+    {
+      "language":"zh-cn",
+      "display":"失败",
+      "tts":"失败"
+    },
+    {
+      "language":"ae-en",
+      "display":"failed",
+      "tts":"failed"
+    }
+  ]
+}

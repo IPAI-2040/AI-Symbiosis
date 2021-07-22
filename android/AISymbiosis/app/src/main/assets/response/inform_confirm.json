@@ -1,0 +1,16 @@
+{
+  "name": "inform_confirm",
+  "version": "0.0.1",
+  "response": [
+    {
+      "language":"zh-cn",
+      "display":"请确认",
+      "tts":"请确认"
+    },
+    {
+      "language":"ae-en",
+      "display":"please confirm",
+      "tts":"please confirm"
+    }
+  ]
+}

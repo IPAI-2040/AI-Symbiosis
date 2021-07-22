@@ -1,0 +1,16 @@
+{
+  "name": "inform_choose",
+  "version": "0.0.1",
+  "response": [
+    {
+      "language":"zh-cn",
+      "display":"请选择",
+      "tts":"请选择"
+    },
+    {
+      "language":"ae-en",
+      "display":"please choose",
+      "tts":"please choose"
+    }
+  ]
+}

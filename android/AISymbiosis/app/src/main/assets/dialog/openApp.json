@@ -1,0 +1,36 @@
+{
+  "name": "openApp",
+  "version": "0.0.1",
+  "description": "open app",
+  "engine": "FrameBased",
+  "breakable": true,
+  "parameters": [
+    {
+      "name": "appName",
+      "type": "String",
+      "required": "true",
+      "skip": "false",
+      "parameters": [
+        "name"
+      ],
+      "resolver": "locateApp",
+      "need_confirm": "false | whenOnly",
+      "dialog-act": {
+        "inform_success": "inform_success",
+        "inform_failure": "inform_failure",
+        "inform_choose": "inform_choose",
+        "inform_confirm": "inform_confirm"
+      }
+    }
+  ],
+  "action_end": {
+    "type": "template",
+    "implicit_confirm": "false",
+    "dialog-act": {
+      "inform_success": "success response",
+      "inform_failure": "failure_response",
+      "inform_choose": "choose_response",
+      "inform_confirm": "confirm_response"
+    }
+  }
+}

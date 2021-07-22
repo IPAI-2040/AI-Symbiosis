@@ -2,13 +2,14 @@ package cn.darkfog.ai.symbiosis.context
 
 import com.google.gson.JsonObject
 
-typealias RequestDataFunc = suspend (Map<String,String>,Map<String,MutableList<JsonObject>>) -> RequestResult
-typealias ActionHandler = suspend (Map<String,String>) -> ExecuteResult
+typealias RequestDataFunc = suspend (Map<String,JsonObject>,Map<String,MutableList<JsonObject>>) -> RequestResult
+typealias ActionHandler = suspend (Map<String,JsonObject>) -> ExecuteResult
 
 
 data class RequestResult(
     val code:RequestCode = RequestCode.NotFound,
-    val data:MutableList<JsonObject> = mutableListOf()
+    val value:MutableList<String> = mutableListOf(),
+    val extra:MutableList<JsonObject> = mutableListOf()
 )
 
 enum class RequestCode{
@@ -40,11 +41,11 @@ open class BaseRouter {
         requestRouter[action] = func
     }
 
-    suspend fun requestData(action:String,frames:Map<String,String>,data:Map<String,MutableList<JsonObject>>):RequestResult{
+    suspend fun requestData(action:String,frames:Map<String,JsonObject>,data:Map<String,MutableList<JsonObject>>):RequestResult{
         return requestRouter[action]?.invoke(frames,data)?: RequestResult()
     }
 
-    suspend fun executeAction(action:String, frames:Map<String,String>):ExecuteResult{
+    suspend fun executeAction(action:String, frames:Map<String,JsonObject>):ExecuteResult{
         return actionRouter[action]?.invoke(frames)?:ExecuteResult()
     }
 

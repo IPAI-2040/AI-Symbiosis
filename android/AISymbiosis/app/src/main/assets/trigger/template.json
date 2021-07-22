@@ -1,12 +1,12 @@
 {
   "triggers": [
     {
-      "task": "template",
-      "domain": "template",
-      "path": "path",
-      "loadWhenInit":false
+      "task": "openApp",
+      "domain": "apps",
+      "path": "assets:dialog.openApp",
+      "loadWhenInit":true,
       "intents": [
-        "Template_Nothing"
+        "local0:openApp"
       ]
     }
   ]
