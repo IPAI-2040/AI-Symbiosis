@@ -91,7 +91,8 @@ object BaiduSpeechToText : SpeechToText {
         private const val  CALLBACK_EVENT_ASR_EXIT = "asr.exit"
         private const val  CALLBACK_EVENT_ASR_CANCEL = "asr.cancel"
         private const val  CALLBACK_EVENT_ASR_ERROR = "asr.error"
-        override fun onEvent(p0: String?, p1: String?, p2: ByteArray?, p3: Int, p4: Int) {
+        override fun onEvent(name: String?, params: String?, data: ByteArray?, offset: Int, length: Int) {
+            if (name==CALLBACK_EVENT_ASR_AUDIO) return
             TODO("Not yet implemented")
         }
 
