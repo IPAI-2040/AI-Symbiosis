@@ -1,6 +1,6 @@
 package cn.darkfog.ai.symbiosis.assistant.foundation.util
 
-import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextLinker
+import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
 import io.reactivex.Completable
 import io.reactivex.Single
 import java.io.*
@@ -13,12 +13,12 @@ object StorageUtil {
     private const val nlu_RULE_FILE = "asr_nlu"
 
     init {
-        AppContextLinker.context.getExternalFilesDir(AUDIO_FILE)
-        AppContextLinker.context.getExternalFilesDir(CACHE_FILE)
+        AppContextContainer.context.getExternalFilesDir(AUDIO_FILE)
+        AppContextContainer.context.getExternalFilesDir(CACHE_FILE)
     }
 
-    val CACHE_PATH = AppContextLinker.context.getExternalFilesDir(CACHE_FILE)?.absolutePath
-    val AUDIO_PATH = AppContextLinker.context.getExternalFilesDir(AUDIO_FILE)?.absolutePath
+    val CACHE_PATH = AppContextContainer.context.getExternalFilesDir(CACHE_FILE)?.absolutePath
+    val AUDIO_PATH = AppContextContainer.context.getExternalFilesDir(AUDIO_FILE)?.absolutePath
 
 
     fun <T : Serializable> getCache(modelClass: Class<T>, fileName: String): Single<T> {

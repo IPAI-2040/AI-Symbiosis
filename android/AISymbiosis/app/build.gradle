@@ -98,6 +98,8 @@ dependencies {
 
     api 'androidx.recyclerview:recyclerview:1.2.1'
 
+    api 'com.jakewharton.timer:timber:4.7.1'
+
     implementation project(':baidu:core')
     implementation 'org.jeasy:easy-rules-core:4.1.0'
 

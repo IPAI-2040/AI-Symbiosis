@@ -5,7 +5,7 @@ import android.app.Application
 import android.content.Context
 
 @SuppressLint("StaticFieldLeak")
-object AppContextLinker{
+object AppContextContainer{
     lateinit var context: Context
         private set
 

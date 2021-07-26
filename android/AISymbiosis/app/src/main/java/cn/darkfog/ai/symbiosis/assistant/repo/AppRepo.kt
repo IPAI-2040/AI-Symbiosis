@@ -1,7 +1,7 @@
 package cn.darkfog.ai.symbiosis.assistant.repo
 
 import android.content.pm.PackageInfo
-import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextLinker
+import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
 import cn.darkfog.ai.symbiosis.context.ExecuteResult
 import cn.darkfog.ai.symbiosis.context.RequestResult
 import cn.darkfog.ai.symbiosis.context.annotation.Action
@@ -23,7 +23,7 @@ object AppRepo {
     }
 
     private fun openApp(packageInfo: PackageInfo) {
-        val context = AppContextLinker.context
+        val context = AppContextContainer.context
         context.startActivity(context.packageManager.getLaunchIntentForPackage(packageInfo.packageName))
     }
 

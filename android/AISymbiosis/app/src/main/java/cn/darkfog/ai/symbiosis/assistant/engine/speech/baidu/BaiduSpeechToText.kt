@@ -4,7 +4,7 @@ import android.os.Bundle
 import cn.darkfog.ai.symbiosis.assistant.R
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechEvent
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechToText
-import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextLinker
+import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
 import cn.darkfog.ai.symbiosis.assistant.foundation.util.StorageUtil
 import com.baidu.speech.EventListener
 import com.baidu.speech.asr.SpeechConstant
@@ -15,7 +15,7 @@ import org.json.JSONObject
 
 object BaiduSpeechToText : SpeechToText {
     // SDK集成步骤 初始化asr的EventManager示例，多次得到的类，只能选一个使用
-    val asr = com.baidu.speech.EventManagerFactory.create(AppContextLinker.context, "asr")
+    val asr = com.baidu.speech.EventManagerFactory.create(AppContextContainer.context, "asr")
 
     override fun init(extra: Bundle?): Completable {
         return Completable.create {

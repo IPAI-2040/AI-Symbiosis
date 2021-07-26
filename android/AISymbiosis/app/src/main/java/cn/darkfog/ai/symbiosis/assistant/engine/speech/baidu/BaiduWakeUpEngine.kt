@@ -3,25 +3,21 @@ package cn.darkfog.ai.symbiosis.assistant.engine.speech.baidu
 import android.os.Bundle
 import cn.darkfog.ai.symbiosis.assistant.engine.SpeechEventType
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechEvent
-import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechState
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUp
-import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextLinker
+import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
 import com.baidu.aip.asrwakeup3.core.wakeup.WakeUpResult
-import com.baidu.aip.asrwakeup3.core.wakeup.listener.IWakeupListener
-import com.baidu.aip.asrwakeup3.core.wakeup.listener.RecogWakeupListener
 import com.baidu.speech.EventListener
 import com.baidu.speech.EventManagerFactory
 import com.baidu.speech.asr.SpeechConstant
 import io.reactivex.Completable
 import io.reactivex.Maybe
-import io.reactivex.ObservableEmitter
 import io.reactivex.SingleEmitter
 import org.json.JSONObject
 import java.util.*
 
 object BaiduWakeUpEngine:WakeUp {
 
-    private val wp =EventManagerFactory.create(AppContextLinker.context,"wp")
+    private val wp =EventManagerFactory.create(AppContextContainer.context,"wp")
 
     override fun init(extra: Bundle?): Completable {
         return Completable.create{
