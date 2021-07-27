@@ -1,7 +1,7 @@
 {
   "name": "openApp",
   "version": "0.0.1",
-  "description": "open app",
+  "description": "open apps",
   "engine": "FrameBased",
   "breakable": true,
   "parameters": [

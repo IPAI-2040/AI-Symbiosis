@@ -1,0 +1,13 @@
+{
+  "triggers": [
+    {
+      "task": "openApp",
+      "domain": "apps",
+      "path": "assets:dialog/openApp.json",
+      "loadWhenInit":true,
+      "intents": [
+        "local0.openApp"
+      ]
+    }
+  ]
+}
