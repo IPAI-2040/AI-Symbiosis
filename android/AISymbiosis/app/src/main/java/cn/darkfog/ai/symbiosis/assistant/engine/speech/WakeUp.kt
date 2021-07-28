@@ -11,7 +11,7 @@ import io.reactivex.Observable
 
 interface WakeUp{
     fun init(extra:Bundle? = null):Completable
-    fun start(extra:Bundle? = null): Maybe<SpeechEvent>
+    fun start(extra:Bundle? = null): Maybe<cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUpResult>
     fun stop(): Completable
     fun release(): Completable
     companion object{

@@ -1,7 +1,7 @@
 package cn.darkfog.ai.symbiosis.assistant.engine.speech.baidu
 
 import android.os.Bundle
-import cn.darkfog.ai.symbiosis.assistant.engine.SpeechEventType
+import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechEventType
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechEvent
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUp
 import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
@@ -25,7 +25,7 @@ object BaiduWakeUpEngine:WakeUp {
         }
     }
 
-    override fun start(extra: Bundle?): Maybe<SpeechEvent> {
+    override fun start(extra: Bundle?): Maybe<cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUpResult> {
         return Maybe.create{
             val params: MutableMap<String, Any> = HashMap()
             params[SpeechConstant.WP_WORDS_FILE] = "assets:///WakeUp.bin"
@@ -56,9 +56,9 @@ object BaiduWakeUpEngine:WakeUp {
         private const val CALLBACK_EVENT_WAKEUP_SUCCESS = "wp.data"
         private const val CALLBACK_EVENT_WAKEUP_AUDIO = "wp.audio"
 
-        private lateinit var emitter:SingleEmitter<SpeechEvent>
+        private lateinit var emitter:SingleEmitter<cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUpResult>
 
-        fun setListener(singleEmitter: SingleEmitter<SpeechEvent>) {
+        fun setListener(singleEmitter: SingleEmitter<cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUpResult>) {
             emitter = singleEmitter
         }
 
@@ -72,7 +72,7 @@ object BaiduWakeUpEngine:WakeUp {
                     if (result.hasError()) { // error不为0依旧有可能是异常情况
                         emitter.onError(Exception("wake up errorCode:$errorCode"))
                     } else {
-                        emitter.onSuccess(SpeechEvent(SpeechEventType.ASR_WUW, result.word))
+                        emitter.onSuccess(cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUpResult(result.word))
                     }
                 }
                 CALLBACK_EVENT_WAKEUP_ERROR -> {

@@ -2,8 +2,8 @@ package cn.darkfog.ai.symbiosis.assistant.engine.dialog.engine
 
 import cn.darkfog.ai.symbiosis.assistant.engine.dialog.bean.*
 import cn.darkfog.ai.symbiosis.assistant.engine.dialog.engine.bean.FrameBasedTask
+import io.reactivex.Completable
 import io.reactivex.Single
-import io.reactivex.SingleEmitter
 import io.reactivex.SingleOnSubscribe
 import java.lang.UnsupportedOperationException
 
@@ -13,6 +13,10 @@ object FrameBasedEngine {
     private val taskCache:MutableMap<String,TaskJson> = mutableMapOf()
     private lateinit var currentTask: FrameBasedTask
 
+    fun init():Completable{
+
+        return Completable.complete()
+    }
     //需不需要全部加载进来？需要测试一下延迟，然后制定
     fun init(triggerList: TriggerList){
         triggerList.triggers.forEach { trigger ->
