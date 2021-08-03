@@ -1,10 +1,9 @@
 package cn.darkfog.ai.symbiosis.assistant.engine.speech.baidu
 
 import android.os.Bundle
-import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechEventType
-import cn.darkfog.ai.symbiosis.assistant.engine.speech.SpeechEvent
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUp
 import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
+import cn.darkfog.ai.symbiosis.assistant.foundation.log.logD
 import com.baidu.aip.asrwakeup3.core.wakeup.WakeUpResult
 import com.baidu.speech.EventListener
 import com.baidu.speech.EventManagerFactory
@@ -22,6 +21,7 @@ object BaiduWakeUpEngine:WakeUp {
     override fun init(extra: Bundle?): Completable {
         return Completable.create{
             wp.registerListener(Listener)
+            it.onComplete()
         }
     }
 
@@ -63,6 +63,9 @@ object BaiduWakeUpEngine:WakeUp {
         }
 
         override fun onEvent(name: String?, params: String?, data: ByteArray?, offset: Int, length: Int) {
+            logD {
+                "name = $name\n" + "params = $params\n" + "data = ${String(data?: ByteArray(0))}"
+            }
             if (!this::emitter.isInitialized) return
             if (emitter.isDisposed) return
             when(name){

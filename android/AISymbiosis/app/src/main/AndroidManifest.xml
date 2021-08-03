@@ -12,13 +12,25 @@
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <activity android:name="cn.darkfog.ai.symbiosis.assistant.MainActivity"
             android:launchMode="singleInstance"
-            android:theme="@android:style/Theme.NoDisplay">
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.baidu.speech.APP_ID"
+            android:value="24646193"/>
+
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="iMHM7stDaowxEbBrWLwNZZ8F"/>
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="sekUpue2a2BliKc3H9w5SHVWkyBIK9aa"/>
+
     </application>
 
 </manifest>

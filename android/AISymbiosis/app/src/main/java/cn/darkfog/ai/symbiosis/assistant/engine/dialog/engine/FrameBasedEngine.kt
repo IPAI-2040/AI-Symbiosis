@@ -14,7 +14,6 @@ object FrameBasedEngine {
     private lateinit var currentTask: FrameBasedTask
 
     fun init():Completable{
-
         return Completable.complete()
     }
     //需不需要全部加载进来？需要测试一下延迟，然后制定

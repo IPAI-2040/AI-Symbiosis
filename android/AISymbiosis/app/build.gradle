@@ -94,11 +94,11 @@ dependencies {
     //工具库
     api 'com.blankj:utilcodex:1.29.0'
 
-    api 'androidx.constraintlayout:constraintlayout:2.0.4'
+    api 'androidx.constraintlayout:constraintlayout:2.1.0'
 
     api 'androidx.recyclerview:recyclerview:1.2.1'
 
-    api 'com.jakewharton.timer:timber:4.7.1'
+    api 'com.jakewharton.timber:timber:4.7.1'
 
     implementation project(':baidu:core')
     implementation 'org.jeasy:easy-rules-core:4.1.0'
