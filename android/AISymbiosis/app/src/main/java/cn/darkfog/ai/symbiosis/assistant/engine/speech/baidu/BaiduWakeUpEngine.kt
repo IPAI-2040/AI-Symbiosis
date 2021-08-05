@@ -2,9 +2,9 @@ package cn.darkfog.ai.symbiosis.assistant.engine.speech.baidu
 
 import android.os.Bundle
 import cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUp
+import cn.darkfog.ai.symbiosis.assistant.engine.speech.bean.WakeUpResult
 import cn.darkfog.ai.symbiosis.assistant.foundation.arch.AppContextContainer
 import cn.darkfog.ai.symbiosis.assistant.foundation.log.logD
-import com.baidu.aip.asrwakeup3.core.wakeup.WakeUpResult
 import com.baidu.speech.EventListener
 import com.baidu.speech.EventManagerFactory
 import com.baidu.speech.asr.SpeechConstant
@@ -28,6 +28,9 @@ object BaiduWakeUpEngine:WakeUp {
     override fun start(extra: Bundle?): Maybe<cn.darkfog.ai.symbiosis.assistant.engine.speech.WakeUpResult> {
         return Maybe.create{
             val params: MutableMap<String, Any> = HashMap()
+            params[SpeechConstant.APP_ID] = "24646193"
+            params[SpeechConstant.APP_KEY] = "iMHM7stDaowxEbBrWLwNZZ8F"
+            params[SpeechConstant.SECRET] = "sekUpue2a2BliKc3H9w5SHVWkyBIK9aa"
             params[SpeechConstant.WP_WORDS_FILE] = "assets:///WakeUp.bin"
             val json: String = JSONObject(params as Map<*, *>).toString()
             wp.send(SpeechConstant.WAKEUP_START, json, null, 0, 0)

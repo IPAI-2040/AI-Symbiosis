@@ -30,6 +30,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    packagingOptions{
+        doNotStrip "*/*/libvad.dnn.so"
+        doNotStrip "*/*/libbd_easr_s1_merge_normal_20151216.dat.so"
+    }
 }
 
 dependencies {
@@ -100,7 +104,7 @@ dependencies {
 
     api 'com.jakewharton.timber:timber:4.7.1'
 
-    implementation project(':baidu:core')
+    //implementation project(':baidu:core')
     implementation 'org.jeasy:easy-rules-core:4.1.0'
 
     implementation project(':context')
