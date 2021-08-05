@@ -18,9 +18,9 @@ class MainActivity : AppCompatActivity() {
             BaiduWakeUpEngine.init().doOnComplete {
                 addShowInfo("init complete")
                 BaiduWakeUpEngine.start()
-                    .doOnSuccess { "wake up $it" }
-                    .doOnError { "wake up error $it" }
-                    .doOnComplete { "wake complete" }
+                    .doOnSuccess { addShowInfo("wake up $it") }
+                    .doOnError { addShowInfo("wake up error $it") }
+                    .doOnComplete { addShowInfo("wake complete") }
                     .subscribe()
             }.doOnError { addShowInfo("init error $it") }.subscribe()
         }

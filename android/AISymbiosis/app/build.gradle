@@ -10,11 +10,14 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "cn.darkfog.ai.symbiosis.assistant"
+        applicationId "com.baidu.speech.recognizerdemo"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters  'arm64-v8a','armeabi-v7a','armeabi','x86','x86_64'
+        }
     }
 
     buildTypes {
@@ -30,10 +33,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     packagingOptions{
         doNotStrip "*/*/libvad.dnn.so"
         doNotStrip "*/*/libbd_easr_s1_merge_normal_20151216.dat.so"
     }
+
 }
 
 dependencies {
